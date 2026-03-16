@@ -22,11 +22,8 @@ class P():
     else:
       self.move,self.max=[(1,0),(-1,0),(0,1),(0,-1)],8
       self.value=5
-#      self.sym=
-
   def __str__(self):return self.type+" "+str(self.color)  
   def __repr__(self): return self.__str__()
-
   def legal_move(self,check):
     M,D,A=[],[],[]
     for dx,dy in self.move:
@@ -45,7 +42,7 @@ class P():
         else:
           A.append([x,y])
           break      
-    return M,D,A 
+    return cleareturn(M,D,A) 
 
 class color():
   def __init__(self,l1,l2,name):
@@ -92,18 +89,25 @@ def testsidefendue(victime):
       D.append(defenseur)
   return D
 
-def testsiechec(self,coord):
-  BACKUP=self.coord
-  self.coord=coord
-  if testsiendanger(self.color.R,1)==[]:
-    self.coord=BACKUP
-    return False
-  else: 
-    self.coord=BACKUP
-    return True
+def testsiechec(self, coord):
+    BACKUP = self.coord
+    self.coord = coord
+    attaquants = testsiendanger(self.color.R, 1)
+    self.coord = BACKUP
+    if not attaquants:return False
+    else:return True
+    
 def inversercolor(color):
   if color==B:return N
   else: return B
+
+def cleareturn(M,D,A):
+  M = [item for item in M if item != []]
+  D = [item for item in D if item != []]
+  A = [item for item in A if item != []]
+  return M, D, A
   
 B=color(1,2,"Blanc")
 N=color(8,7,"Noir")
+
+
